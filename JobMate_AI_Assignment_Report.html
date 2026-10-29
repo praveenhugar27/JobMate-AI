@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAI Assignment Report - JobMate AI (24DS3502)</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2b6cb0;
+            --secondary: #2c5282;
+            --accent: #319795;
+            --bg: #ffffff;
+            --surface: #f7fafc;
+            --border: #e2e8f0;
+            --text-dark: #2d3748;
+            --text-muted: #718096;
+            --success: #38a169;
+            --danger: #e53e3e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-dark);
+            background-color: #f0f4f8;
+            line-height: 1.6;
+            padding: 30px 15px;
+        }
+
+        .report-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 50px 60px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            border-top: 6px solid var(--primary);
+        }
+
+        /* College Header */
+        .university-header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .university-header h1 {
+            font-size: 26px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .university-header h2 {
+            font-size: 17px;
+            color: var(--primary-light);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .university-header p {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .assignment-title {
+            text-align: center;
+            background: #ebf8ff;
+            color: #2b6cb0;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+            border: 1px solid #bee3f8;
+        }
+
+        /* Metadata Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 14.5px;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        th {
+            background-color: #edf2f7;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #fcfdfe;
+        }
+
+        /* Section Headings */
+        h2.section-header {
+            font-size: 19px;
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 12px;
+            margin-top: 30px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            background: #f7fafc;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        p, li {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: #334155;
+            text-align: justify;
+        }
+
+        ul, ol {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* Highlights & Cards */
+        .highlight-box {
+            background-color: #f0fff4;
+            border-left: 4px solid var(--success);
+            padding: 14px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 18px 0;
+            font-size: 14.5px;
+        }
+
+        .highlight-box strong {
+            color: #22543d;
+        }
+
+        .workflow-box {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 20px 0;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 13.5px;
+            line-height: 1.7;
+            color: #2d3748;
+            overflow-x: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 12.5px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        .badge-success { background: #c6f6d5; color: #22543d; }
+        .badge-info { background: #bee3f8; color: #2b6cb0; }
+        .badge-warning { background: #feebc8; color: #744210; }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0 25px 0;
+        }
+
+        .metric-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .metric-val {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-top: 4px;
+        }
+
+        .metric-lbl {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .footer {
+            margin-top: 45px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Print formatting */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .report-container {
+                box-shadow: none;
+                padding: 0;
+                border: none;
+            }
+            .btn-print {
+                display: none !important;
+            }
+            h2.section-header {
+                page-break-after: avoid;
+            }
+            table {
+                page-break-inside: avoid;
+            }
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-print:hover {
+            background: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+
+<button class="btn-print" onclick="window.print()">
+    🖨️ Print / Save as PDF
+</button>
+
+<div class="report-container">
+    <!-- University Header -->
+    <div class="university-header">
+        <h1>DAYANANDA SAGAR UNIVERSITY</h1>
+        <h2>School of Engineering &bull; Department of CSE (Data Science)</h2>
+        <p>Harohalli, Bengaluru, Karnataka</p>
+    </div>
+
+    <div class="assignment-title">
+        FOUNDATIONS OF AI & AUTHENTIC INTELLIGENCE (24DS3502) &bull; ASSIGNMENT REPORT
+    </div>
+
+    <!-- Course & Team Meta -->
+    <table>
+        <tr>
+            <th style="width: 25%;">Course Name</th>
+            <td style="width: 75%;">Foundations of AI & Authentic Intelligence</td>
+        </tr>
+        <tr>
+            <th>Course Code</th>
+            <td><strong>24DS3502</strong></td>
+        </tr>
+        <tr>
+            <th>Assignment Topic</th>
+            <td><strong>JobMate AI — Your Personal Placement Strategist</strong></td>
+        </tr>
+        <tr>
+            <th>Section</th>
+            <td><strong>5A</strong></td>
+        </tr>
+    </table>
+
+    <h2 class="section-header">Team Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">USN</th>
+                <th style="width: 35%;">Student Name</th>
+                <th style="width: 40%;">Project Contribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>ENG24DS0043</strong></td>
+                <td>Ramya Anegundi</td>
+                <td>Ollama AI Integration, Document Processing & UI Flow</td>
+            </tr>
+            <tr>
+                <td><strong>ENG25DS1003</strong></td>
+                <td>Praveen J Hugar</td>
+                <td>SQLite Architecture, Quiz Evaluation & Testing</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="section-header">1. Agent Identity</h2>
+    <p><strong>Agent Name:</strong> <code>JobMate AI — Your Personal Placement Strategist</code></p>
+    <p><strong>Agent Role:</strong> JobMate AI is an AI-powered placement preparation assistant developed to help college students prepare systematically for internships and campus placements. It analyses a student's resume alongside a target job description, identifies relevant skills and potential skill gaps, and provides AI-generated preparation guidance. The application also includes interactive SQL learning missions, target-role-specific quizzes, instant answer explanations, and a continuous learning progress tracker.</p>
+
+    <h2 class="section-header">2. Agent Goal</h2>
+    <p>The primary goal of JobMate AI is to help students prepare for technical placements through a personalized, realistic, and structured learning process. It aims to empower students to:</p>
+    <ul>
+        <li>Understand the specific competencies required by a target job role.</li>
+        <li>Objectively recognize technical skill gaps existing in their current resumes.</li>
+        <li>Practise foundational database and role-based concepts via progressive quizzes.</li>
+        <li>Track preparation trajectory and performance metrics over time.</li>
+    </ul>
+
+    <h2 class="section-header">3. Special Feature: The Resume-to-Readiness Learning Loop</h2>
+    <div class="highlight-box">
+        <strong>The Resume-to-Readiness Learning Loop:</strong><br>
+        Instead of stopping after passively analyzing a resume, JobMate AI connects resume analysis with active preparation guidance and technical practice. Students identify their skill gaps, receive a day-by-day preparation schedule from a local LLM, complete targeted quizzes, review explanations, and track their scores in SQLite.
+    </div>
+
+    <h2 class="section-header">4. Main Capabilities</h2>
+    <ol>
+        <li><strong>Resume & Job Requirement Analysis:</strong> Extracts text from PDF resumes using PyMuPDF and computes word-boundary matched skill overlaps against job requirements.</li>
+        <li><strong>Personalized Preparation Planning:</strong> Uses the local <code>Qwen2.5:3B</code> model through Ollama to generate an exact day-by-day study schedule based on available time.</li>
+        <li><strong>Interactive Technical Learning:</strong> Offers 3 tiers of SQL quizzes (Basics, Aggregation, Joins & Subqueries) with an 80% passing threshold, plus domain quizzes (Data Analyst, Software Engineer, Data Scientist, Web Developer).</li>
+        <li><strong>Quiz Evaluation & Progress Tracking:</strong> Evaluates answers in real time, provides detailed explanations, suggests next steps, and records every attempt into SQLite.</li>
+    </ol>
+
+    <h2 class="section-header">5. System Workflow</h2>
+    <div class="workflow-box">
+[1. User Input]           Student specifies role, days (e.g. 7), uploads resume & enters JD.
+        ↓
+[2. Document Processing]  PyMuPDF extracts selectable text stream directly in-memory.
+        ↓
+[3. Skill Analysis]       Boundary-aware Regex identifies matched skills and skill gaps.
+        ↓
+[4. AI Guidance]          Ollama (Qwen2.5:3B) generates structured, day-by-day learning tasks.
+        ↓
+[5. Technical Practice]   Candidate solves 5-question SQL and Role-specific quizzes.
+        ↓
+[6. Progress Tracking]    Scores, comparisons, and timestamps permanently stored in SQLite.
+    </div>
+
+    <h2 class="section-header">6. Tools Used and Purpose</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Tool / Technology</th>
+                <th style="width: 75%;">Purpose in Project</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Python 3.13</strong></td>
+                <td>Implements the core backend application logic, data flow, and text processing.</td>
+            </tr>
+            <tr>
+                <td><strong>Streamlit</strong></td>
+                <td>Builds the reactive, interactive web interface and handles session state.</td>
+            </tr>
+            <tr>
+                <td><strong>Ollama</strong></td>
+                <td>Runs the language model locally with 100% offline privacy and low latency.</td>
+            </tr>
+            <tr>
+                <td><strong>Qwen2.5:3B</strong></td>
+                <td>High-reasoning local SLM used to synthesize customized preparation plans.</td>
+            </tr>
+            <tr>
+                <td><strong>PyMuPDF (fitz)</strong></td>
+                <td>Extracts clean selectable text from candidate PDF resumes.</td>
+            </tr>
+            <tr>
+                <td><strong>SQLite 3</strong></td>
+                <td>Local relational database that stores quiz attempts, scores, and history.</td>
+            </tr>
+            <tr>
+                <td><strong>VS Code</strong></td>
+                <td>Development environment used for programming, debugging, and testing.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="section-header">7. Sample Input and Observed Output</h2>
+
+    <p><strong>Sample Test Parameters:</strong></p>
+    <ul>
+        <li><strong>Target Role:</strong> Data Analyst</li>
+        <li><strong>Preparation Time:</strong> 7 days</li>
+        <li><strong>Uploaded Resume:</strong> <code>Ramya_Anegundi_Resume.pdf</code></li>
+        <li><strong>Target Job Description:</strong> Data Analyst Intern (Requires: Python, SQL, Excel, Power BI, Statistics, Data Visualization)</li>
+    </ul>
+
+    <div class="metrics-grid">
+        <div class="metric-card">
+            <div class="metric-lbl">Skill Match</div>
+            <div class="metric-val" style="color: #2b6cb0;">33%</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-lbl">SQL Basics Score</div>
+            <div class="metric-val" style="color: #38a169;">4 / 5 (80%)</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-lbl">Role Quiz Score</div>
+            <div class="metric-val" style="color: #38a169;">5 / 5 (100%)</div>
+        </div>
+        <div class="metric-card">
+            <div class="metric-lbl">Total Attempts Recorded</div>
+            <div class="metric-val" style="color: #d69e2e;">21 Attempts</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Observed Output Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Matched Skills</strong></td>
+                <td><span class="badge badge-success">Python</span> <span class="badge badge-success">SQL</span></td>
+            </tr>
+            <tr>
+                <td><strong>Potential Skill Gaps</strong></td>
+                <td><span class="badge badge-warning">Excel</span> <span class="badge badge-warning">Power BI</span> <span class="badge badge-warning">Statistics</span> <span class="badge badge-warning">Data Visualization</span></td>
+            </tr>
+            <tr>
+                <td><strong>AI Study Plan</strong></td>
+                <td>Generated exact Day 1 through Day 7 numbered plan targeting Excel formulas, Power BI dashboards, and descriptive statistics tasks.</td>
+            </tr>
+            <tr>
+                <td><strong>Progress Metrics</strong></td>
+                <td>SQL Basics score: <strong>4/5 (80%)</strong> &bull; Python Basics score: <strong>5/5 (100%)</strong> &bull; Total recorded attempts: <strong>21</strong>.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2 class="section-header">8. Working Prototype</h2>
+    <p>JobMate AI is fully implemented as a local Streamlit web application running directly on the computer. Verified working modules include:</p>
+    <ul>
+        <li>Seamless PDF resume upload with in-memory parsing.</li>
+        <li>Resume-to-job skill matching and gap calculation engine.</li>
+        <li>Local AI-generated study guidance via Ollama REST API.</li>
+        <li>Three sequential SQL quiz levels with unlock thresholds.</li>
+        <li>Target-role-specific quizzes with instant scoring and explanations.</li>
+        <li>SQLite-based quiz history tracking table with attempt metrics.</li>
+    </ul>
+
+    <h2 class="section-header">9. Limitations</h2>
+    <ul>
+        <li><strong>PDF Format Dependency:</strong> Text extraction works on selectable text; image-based scanned PDFs require optical character recognition (OCR).</li>
+        <li><strong>Catalog Scope:</strong> Skill detection is based on predefined technical keywords; implicit or non-standard synonyms may be omitted.</li>
+        <li><strong>Model Hallucinations:</strong> AI-generated plans should be reviewed by students for optimal pacing.</li>
+        <li><strong>Assessment Depth:</strong> Quizzes benchmark foundational concepts rather than comprehensive placement interviews.</li>
+        <li><strong>Environment Prerequisites:</strong> Requires Python 3.13, local packages, and the Ollama model installed on the host machine.</li>
+        <li><strong>Non-standard Score:</strong> The skill match percentage is an internal indicator, not an official hiring employability index.</li>
+    </ul>
+
+    <div class="footer">
+        Department of CSE (Data Science) &bull; Dayananda Sagar University &bull; Academic Year 2026
+    </div>
+</div>
+
+</body>
+</html>
